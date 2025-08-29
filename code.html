@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinesh's Art Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #111827; /* Dark background */
+            color: #F3F4F6; /* Light text */
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-bg {
+            background: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)), url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1945&q=80') center center/cover no-repeat;
+        }
+        .gallery-item {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #F59E0B, #EF4444);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.3), 0 4px 6px -2px rgba(239, 68, 68, 0.2);
+        }
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80vw;
+            max-height: 80vh;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="bg-gray-900/80 backdrop-blur-sm fixed w-full z-20 top-0 left-0 border-b border-gray-700">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold font-playfair text-white">Dinesh Art</a>
+            <div class="space-x-8 text-lg hidden md:flex">
+                <a href="#gallery" class="text-gray-300 hover:text-amber-400 transition">Gallery</a>
+                <a href="#about" class="text-gray-300 hover:text-amber-400 transition">About</a>
+                <a href="#contact" class="text-gray-300 hover:text-amber-400 transition">Contact</a>
+            </div>
+             <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#gallery" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700">Gallery</a>
+            <a href="#about" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700">About</a>
+            <a href="#contact" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-screen flex items-center justify-center text-center">
+        <div class="bg-black/50 p-8 rounded-lg">
+            <h1 class="text-5xl md:text-7xl font-playfair font-bold text-white leading-tight">Welcome to My Art Gallery</h1>
+            <p class="text-xl text-gray-200 mt-4 max-w-2xl mx-auto">Discover unique pencil sketches that capture moments and emotions. Created with passion and precision.</p>
+            <a href="#gallery" class="mt-8 inline-block btn-primary text-white font-bold py-3 px-8 rounded-full text-lg">Explore Artwork</a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-playfair font-bold text-center mb-12">My Collection</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Artworks will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <img src="img/dinesh.r.jpg" alt="Artist Dinesh" class="rounded-lg shadow-2xl w-full">
+            </div>
+            <div class="md:w-1/2 text-center md:text-left">
+                <h2 class="text-4xl font-playfair font-bold mb-4">About the Artist</h2>
+                <p class="text-5xl font-playfair text-amber-400 mb-6">Dinesh</p>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Hello! I'm Dinesh, a passionate sketch artist. For me, art is a way to express the unspoken and capture the soul of a subject. From iconic characters to intimate portraits, I pour my heart into every line. This gallery is a window into my world, and I'm thrilled to share it with you.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-playfair font-bold mb-4">Get In Touch</h2>
+            <p class="text-lg text-gray-400 mb-8 max-w-xl mx-auto">Have a question or interested in a custom piece? I'd love to hear from you.</p>
+            <div class="text-xl space-y-4">
+                <p><strong>Email:</strong> <a href="mailto:dinesh2442@gmail.com" class="text-amber-400 hover:underline">dinesh2442@gmail.com</a></p>
+                <p><strong>Phone:</strong> <a href="tel:+917603892982" class="text-amber-400 hover:underline">+91 7603892982</a></p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700 py-6">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 2025 Dinesh Art. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Artworks Data ---
+            const artworks = [
+                {
+                    title: 'Captain Jack Sparrow',
+                    description: 'A detailed portrait of the legendary pirate.',
+                    
+                    image: 'img/jack.jpg'
+                },
+                {
+                    title: 'Spider-Man & Gwen',
+                    description: 'A romantic moment captured between two iconic characters.',
+                    
+                    image: 'img/sprider man.jpg'
+                },
+                {
+                    title: 'Thalapathy Vijay',
+                    description: 'A stylish sketch of the beloved actor.',
+                    image: 'img/vijai.jpg'
+                },
+                {
+                    title: 'Captain America',
+                    description: 'The First Avenger, captured in a moment of determination.',
+                    image: 'img/cp.jpg'
+                },
+                {
+                    title: 'Dobby the House-Elf',
+                    description: 'A touching portrait of the free elf from Harry Potter.',
+                    image: 'img/WhatsApp Image 2025-08-21 at 22.51.03_689a9024.jpg'
+                }
+            ];
+
+            // --- Populate Gallery ---
+            const gallery = document.querySelector('#gallery .grid');
+            artworks.forEach(art => {
+                const artElement = `
+                    <div class="gallery-item bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                        <img src="${art.image}" alt="${art.title}" class="w-full h-80 object-cover art-image">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold font-playfair mb-2">${art.title}</h3>
+                            <p class="text-gray-400 mb-4">${art.description}</p>
+                            <a href="#contact" class="inline-block btn-primary text-white font-semibold py-2 px-6 rounded-full text-sm">Inquire to Buy</a>
+                        </div>
+                    </div>
+                `;
+                gallery.innerHTML += artElement;
+            });
+
+            // --- Modal Logic ---
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeBtn = document.getElementById('modalClose');
+
+            document.querySelectorAll('.art-image').forEach(img => {
+                img.onclick = function() {
+                    modal.style.display = "flex";
+                    modalImg.src = this.src;
+                }
+            });
+
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+            modal.onclick = function(event) {
+                 if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>
